@@ -21,6 +21,81 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
+Features
+----------------
+JWT authentication
+Admin and Member roles
+Admin can create team accounts
+Authenticated users can view all documents
+Authenticated users can upload documents
+Users can delete only their own documents
+Users cannot delete documents uploaded by other team members
+Unauthenticated API requests return 401 Unauthorized
+Admin-only user management
+Database seeders with:
+1 Admin
+2 Members
+5 Documents
+
+Backend Setup
+------------------
+1. Clone Repository
+git clone 
+cd document-portal-api
+2. Install Laravel Dependencies
+cd backend
+composer install
+3. Create Environment File
+cp .env.example .env
+
+Generate application key:
+
+php artisan key:generate
+4. Configure Database
+
+Update the .env file:
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=document_portal_api
+DB_USERNAME=root
+DB_PASSWORD=
+
+Install JWT
+-----------------------------------
+composer require php-open-source-saver/jwt-auth
+
+Publish JWT configuration:
+php artisan vendor:publish --provider="PHPOpenSourceSaver\JWTAuth\Providers\LaravelServiceProvider"
+
+Generate JWT secret:
+php artisan jwt:secret
+
+Run Migrations and Seeder
+
+To create the database tables and seed sample data:
+
+php artisan db:seed --class=DocumentUserSeeder
+
+This creates:
+----------------------
+1 Admin
+2 Members
+5 Sample Documents
+
+Create Storage Link
+----------------------
+php artisan storage:link
+
+Start Laravel
+------------------
+composer run dev
+
+Backend will run at:
+
+http://127.0.0.1:8000
+
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
